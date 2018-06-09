@@ -8,20 +8,60 @@
 	<link rel="stylesheet" type="text/css" href="css/easy.css"/>
 	<link rel="stylesheet" type="text/css" href="css/swiper.min.css"/>
 	<link rel="stylesheet" type="text/css" href="css/lezhiIndex.css"/>
+	
+	
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-	
-	
 	<script src="js/swiper.min.js" type="text/javascript" charset="utf-8"></script>
+	
 	<!--<script src="https://cdn.bootcss.com/popper.js/1.14.3/umd/popper.min.js"></script>-->
 	<!--<script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>-->
 
-    <title></title>
+    <title>乐知</title>
     <script type="text/javascript">
     	
    		document.addEventListener('plusready', function(){
    			//console.log("所有plus api都应该在此事件发生后调用，否则会出现plus is undefined。"
    			
    		});
+   		
+   		var isloading = false;
+		var page = 0;
+		var nodata = false;
+   		$(document).ready(function(){
+   			
+   			
+			$(window).scroll(function(){
+　　				//判断是否滑动到页面底部
+     			if($(window).scrollTop() === $(document).height() - $(window).height()){
+     				loadData();
+     			}
+			});
+			
+			function loadData(){
+				if(isloading){return;}
+				isloading = true;
+				if (nodata) {return;}
+				
+				$('.spinner').show();
+				setTimeout(function(){
+					
+					$.get("listDiv.html",function(data,state){
+						$('ul').append(data);
+						page+=1;
+						isloading = false;
+						
+						
+						if (page >= 6) {
+							nodata=true;
+							$('#loadDiv').text('--无更多数据--');
+						}
+						$('.spinner').hide();
+					});
+				},800);
+				
+			}
+		});
+   		
    		
     </script>
 </head>
@@ -60,7 +100,7 @@
 		</div>
 		
 		<div>
-			<ul class="list-unstyled">
+			<ul class="list-unstyled p-0 m-0">
 				<li>
 					<div class="container-fluid row easy-cell">
 						<div class="col-5 cell-image">
@@ -174,12 +214,20 @@
 						</div>
 					</div>
 				</li>
-				
-				
-				
 			</ul>
+			
+		</div>	
+	</div>
+	
+	<!--下拉加载-->
+	<div class="spinner">
+  			<div class="rect1"></div>
+  			<div class="rect2"></div>
+		  	<div class="rect3"></div>
+		  	<div class="rect4"></div>
+		  	<div class="rect5"></div>
 		</div>
-		
+		<div id="loadDiv" style="width: 100%;height: 40px;font-size: 0.75em;text-align: center;padding-top: 4px;">
 	</div>
 	
 	<script type="text/javascript">
@@ -198,7 +246,7 @@
     			}
   		});  
   		var mySwiper = new Swiper ('.swiper2', {
-    			slidesPerView: 4.2,
+    			slidesPerView: 4.1,
       		spaceBetween: 0,
       		freeMode: true,
   		});
