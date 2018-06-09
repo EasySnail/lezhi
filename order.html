@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no,shrink-to-fit=no" />
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css">
+
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		<script src="js/easy.js" type="text/javascript" charset="utf-8"></script>
+
+		<!--<script src="https://cdn.bootcss.com/popper.js/1.14.3/umd/popper.min.js"></script>-->
+		<!--<script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>-->
+		
+		<style type="text/css">
+			body{
+				background-color: #f8f8f8;
+			}
+			.order-book{
+				width: 70px;
+				text-align: center;
+				font-size: 0.8em;
+			}
+			.order-font{
+				font-size: 0.82em;
+			}
+			.order-label{
+				width: 72px;
+				font-size: 0.82em;
+			}
+			.order-total{
+				text-align: right;
+				font-size: 0.82em;
+				color: red;
+				
+			}
+			.order-input{
+				font-size: 0.8em;
+				height: 21px;
+				padding: 0 5px;
+				margin: 0;
+				border-style: none;
+			}
+			.order-textarea{
+				font-size: 0.8em;
+				padding: 4px 3px;
+				margin: 0;
+				line-height: 17px;
+			}
+			.order-num{
+				width: 75px;
+				padding: 0 5px;
+			}
+			.order-num input{
+				padding: 4px;
+				font-size: 0.7em;
+			}
+			.order-price{
+				margin-left: 2px;
+				font-size: 0.75em;
+				color: gray;
+			}
+			
+		</style>
+		
+		<title>产品订购</title>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#order_comit").click(function(){
+					
+					
+					var doms = $("input[type='checkbox']:checked");
+					if (doms.length <= 0) {
+						easy.toast('请选择产品！');
+						return;
+					}
+					
+					if (parseFloat($('#totalMoney').text()) <= 0) {
+						easy.toast('请选择数量！');
+						return;
+					}
+					var name = $("#order-name").val();
+					if (name.length<=0) {
+						easy.toast('请填写姓名！');
+						return;
+					}
+					var tel = $("#order-tel").val();
+					if (tel.length<=0) {
+						easy.toast('请填写手机号！');
+						return;
+					}else if (/[1][0-9]{10}/.test(tel) == false) {
+						easy.toast('请输入正确的手机号！')
+						return;
+					}
+					var area = $("#order-area").val();
+					if (area.length <= 0) {
+						easy.toast('请输入收获地址！')
+						return;
+					}
+					
+					
+					alert('滴滴滴！');
+
+				});
+				$("input[type='checkbox']").change(function(){
+					calculate();
+				});
+				$("input[type='number']").change(function(){
+					calculate();
+				});
+				function calculate(){
+					var doms = $("input[type='checkbox']:checked");
+					var total = 0.0;
+					for (var i = 0; i < doms.length;++i) {
+						var checkdom = doms.get(i);
+						var money = parseFloat(checkdom.value);
+						var bookId = "#"+checkdom.name;
+						var num = $(bookId).val();
+						if (num == null || num == '') {
+							$(bookId).val("");
+							break;
+						}
+						total += (money*num);
+					}
+					$('#totalMoney').text(total);
+				}
+			});
+		</script>
+	</head>
+
+	<body>
+		<div class="container bg-white">
+			<div class="order-cell d-flex pt-3">
+				<div class="d-inline-flex justify-content-between order-label">
+					<div>产</div><div>品</div><div>类</div><div>别：</div>
+				</div>
+				<div class="order-font">教辅资料</div>
+			</div>
+			<div class="dropdown-divider"></div>
+			<div class="order-cell d-flex pb-2">	
+				<div class="d-inline-flex justify-content-between order-label">
+					<div>产</div><div>品</div><div>名</div><div>称：</div>
+				</div>
+				<div class="order-font">济南顶峰画室</div>
+			</div>
+		</div>
+		
+		<div class="container mt-2 bg-white">
+			<div class="order-cell pt-2">
+				<div class="d-inline-flex justify-content-between order-label">
+					<div>产</div><div>品</div><div>选</div><div>择：</div>
+				</div>
+			</div>
+			<div class="dropdown-divider"></div>
+			<div class="ml-2">
+				<div class="form-check">
+      				<div class="d-inline-flex align-items-center">
+      					<label class="form-check-label d-flex align-items-center">
+      						<input type="checkbox" class="form-check-input mt-0" name="book1" value="55">
+        						<img class="img-thumbnail ml-1" src="img/book1.png"/>	
+        					</label>
+        					<div class="order-book">速写书籍</div>
+        					<div class="order-num">
+        						<input class="form-control" pattern="[0-9]*" placeholder="数量" type="number" min="0" max="10000" id="book1" value="" />	
+        					</div>
+        					<div class="order-price">
+        						&times;55/套
+        					</div>
+      				</div>
+      				
+    				</div>
+    				<div class="form-check mt-1">
+      				<div class="d-inline-flex align-items-center">
+      					
+      					<label class="form-check-label d-flex align-items-center">
+        						<input type="checkbox" class="form-check-input mt-0" name="book2" value="55">
+        						<img class="img-thumbnail ml-1" src="img/book2.png"/>
+        					</label>
+        					<div class="order-book">临摹本</div>
+        					<div class="order-num">
+        						<input class="form-control" pattern="[0-9]*" placeholder="数量" type="number" min="0" max="10000" id="book2" value="" />	
+        					</div>
+        					<div class="order-price">
+        						&times;55/套
+        					</div>
+        				</div>			
+    				</div>
+    				<div class="form-check mt-1">
+      				<div class="d-inline-flex align-items-center">
+      					<label class="form-check-label d-flex align-items-center">
+							<input type="checkbox" class="form-check-input mt-0" name="book3" value="98">	
+        						<img class="img-thumbnail ml-1" src="img/book3.png"/>	
+        					</label>
+        					<div class="order-book">速写套装</div>
+        					<div class="order-num">
+        						<input class="form-control" pattern="[0-9]*" placeholder="数量" type="number" min="0" max="10000" id="book3" value="" />	
+        					</div>
+        					<div class="order-price">
+        						&times;98/套
+        					</div>
+        				</div>
+    				</div>
+			</div>
+			
+			<div class="dropdown-divider"></div>
+			<div class="order-cell pb-2 pr-2">
+				<div class="order-total">合计款项：¥<span id="totalMoney">0</span></div>
+			</div>
+			
+		</div>
+		
+		<div class="container mt-2 bg-white">
+			<div class="order-cell d-flex pt-2">
+				<div class="d-inline-flex justify-content-between order-label">
+					<div>联</div><div>系</div><div>人：</div>
+				</div>
+				<div class="flex-grow-1 pr-3">
+					<input class="form-control order-input" type="text" id="order-name" placeholder="请填写收获人姓名" value="" />	
+				</div>
+				
+			</div>
+			<div class="dropdown-divider"></div>
+			<div class="order-cell d-flex">
+				<div class="d-inline-flex justify-content-between order-label">
+					<div>手</div><div>机</div><div>号：</div>
+				</div>
+				<div class="flex-grow-1 pr-3">
+					<input class="order-input form-control" type="tel" id="order-tel" placeholder="请填写收获人手机号码" value="" />
+				</div>
+				
+			</div>
+			<div class="dropdown-divider"></div>
+			<div class="order-cell d-flex">
+				<div class="d-inline-flex justify-content-between order-label">
+					<div>收</div><div>获</div><div>地</div><div>址：</div>
+				</div>
+				
+				<div class="form-group flex-grow-1 pr-3 pl-1">
+					<textarea class="form-control order-textarea" rows="3" id="order-area"></textarea>
+				</div>
+			</div>
+			
+		</div>
+		
+		<div class="text-center mt-2 mb-4" style="background-color: #f8f8f8;">
+				<button id="order_comit" class="btn text-white btn-sm p-0" style="background-color: rgb(245,113,38);width: 150px;height: 28px; border-radius: 6px;">去支付</button>
+		</div>
+		
+	</body>
+
+</html>
