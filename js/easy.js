@@ -3,6 +3,11 @@ var easy = {
 	name:'easy',
 	test1:function(){
 	
+    },
+    	getUrlParam:function(name){
+    		var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");  
+   		var r = window.location.search.substr(1).match(reg);  
+   		if (r != null) return unescape(r[2]); return null;
     	},
 	toast:function(text){
     		if ($("#easy-toast").length > 0) {
@@ -71,9 +76,6 @@ var easyauto = (function (document, undefined) {
 	//自动执行函数
 	
 })(document);
-
-
-
 
 
 

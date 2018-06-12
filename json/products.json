@@ -1,0 +1,36 @@
+{
+	"0":{
+		"pname":"教辅资料",
+		"orgname":"济南顶峰画室",
+		"product":[
+			{
+				"bookid":"book1",
+				"bookname":"速写书籍",
+				"price":"55",
+				"image":"img/book1.png",
+				"unit":"/本"
+			},
+			{
+				"bookid":"book2",
+				"bookname":"临摹本",
+				"price":"55",
+				"image":"img/book2.png",
+				"unit":"/套"
+			},
+			{
+				"bookid":"book3",
+				"bookname":"速写套装",
+				"price":"98",
+				"image":"img/book3.png",
+				"unit":"/套"
+			}
+			
+		]
+	},
+	"1":{
+		
+	},
+	"2":{
+		
+	}
+}

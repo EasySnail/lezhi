@@ -13,69 +13,29 @@
 		<!--<script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>-->
 		
 		<style type="text/css">
-			body{
-				background-color: #f8f8f8;
-			}
-			.order-book{
-				width: 70px;
-				text-align: center;
-				font-size: 0.8em;
-			}
-			.order-font{
-				font-size: 0.875em;
-			}
-			.order-label{
-				width: 72px;
-				font-size: 0.875em;
-			}
-			.order-total{
-				text-align: right;
-				font-size: 0.875em;
-				margin-right: 10px;
-				color: red;
-				
-			}
-			.order-input{
-				font-size: 0.8em;
-				height: 21px;
-				padding: 0 5px;
-				margin: 0;
-				border-style: none;
-			}
-			.order-textarea{
-				font-size: 0.8em;
-				padding: 4px 3px;
-				margin: 0;
-				line-height: 17px;
-			}
-			.order-num{
-				width: 80px;
-				padding: 0 5px;
-			}
-			.order-num input{
-				padding: 4px;
-				font-size: 0.8em;
-			}
-			.order-price{
-				margin-left: 2px;
-				font-size: 0.8em;
-				color: gray;
-			}
-			
+			body{background-color: #f8f8f8;}
+			.container{padding-left: 30px;padding-right: 25px;}
+			.dropdown-divider{margin: 6px -15px 6px -20px;border-color: #CDCDCD;border-width: 0.5px;}
+			.order-book{width: 60px;text-align: left;font-size: 0.8em;margin-left: 10px;}
+			.order-font{font-size: 0.875em;}
+			.order-label{width: 72px;font-size: 0.875em;}
+			.order-total{text-align: right;font-size: 0.875em;margin-right: 10px;color: red;}
+			.order-input{font-size: 0.8em;height: 21px;padding: 0 5px;margin: 0;border-style: none;}
+			.order-textarea{font-size: 0.8em;padding: 4px 3px;margin: 0;line-height: 17px;}
+			.order-num{width: 80px;padding: 0 5px;}
+			.order-num input{padding: 4px;font-size: 0.8em;}
+			.order-price{margin-left: 2px;font-size: 0.8em;color: gray;}
+			.form-check{min-height: 50px;}
 		</style>
-		
 		<title>产品订购</title>
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$("#order_comit").click(function(){
-					
-					
 					var doms = $("input[type='checkbox']:checked");
 					if (doms.length <= 0) {
 						easy.toast('请选择产品！');
 						return;
 					}
-					
 					if (parseFloat($('#totalMoney').text()) <= 0) {
 						easy.toast('请选择数量！');
 						return;
@@ -98,17 +58,15 @@
 						easy.toast('请输入收获地址！')
 						return;
 					}
-					
-					
 					alert('滴滴滴！');
-
 				});
-				$("input[type='checkbox']").change(function(){
+				$('#pruduct_content').on('change',"input[type='checkbox']",function(){
 					calculate();
 				});
-				$("input[type='number']").change(function(){
+				$('#pruduct_content').on('change',"input[type='number']",function(){
 					calculate();
 				});
+				
 				function calculate(){
 					var doms = $("input[type='checkbox']:checked");
 					var total = 0.0;
@@ -135,72 +93,25 @@
 				<div class="d-inline-flex justify-content-between order-label">
 					<div>产</div><div>品</div><div>类</div><div>别：</div>
 				</div>
-				<div class="order-font">教辅资料</div>
+				<div id="product_name" class="order-font"></div>
 			</div>
 			<div class="dropdown-divider"></div>
 			<div class="order-cell d-flex pb-2">	
 				<div class="d-inline-flex justify-content-between order-label">
 					<div>产</div><div>品</div><div>名</div><div>称：</div>
 				</div>
-				<div class="order-font">济南顶峰画室</div>
+				<div id="org_name" class="order-font"></div>
 			</div>
 		</div>
 		
-		<div class="container mt-2 bg-white">
+		<div class="container mt-1 bg-white">
 			<div class="order-cell pt-2">
 				<div class="d-inline-flex justify-content-between order-label">
 					<div>产</div><div>品</div><div>选</div><div>择：</div>
 				</div>
 			</div>
 			<div class="dropdown-divider"></div>
-			<div class="ml-2">
-				<div class="form-check">
-      				<div class="d-inline-flex align-items-center">
-      					<label class="form-check-label d-flex align-items-center">
-      						<input type="checkbox" class="form-check-input mt-0" name="book1" value="55">
-        						<img class="img-thumbnail ml-1" src="img/book1.png"/>	
-        					</label>
-        					<div class="order-book">速写书籍</div>
-        					<div class="order-num">
-        						<input class="form-control" pattern="[0-9]*" placeholder="数量" type="number" min="0" max="10000" id="book1" value="" />	
-        					</div>
-        					<div class="order-price">
-        						&times;55/本
-        					</div>
-      				</div>
-      				
-    				</div>
-    				<div class="form-check mt-1">
-      				<div class="d-inline-flex align-items-center">
-      					
-      					<label class="form-check-label d-flex align-items-center">
-        						<input type="checkbox" class="form-check-input mt-0" name="book2" value="55">
-        						<img class="img-thumbnail ml-1" src="img/book2.png"/>
-        					</label>
-        					<div class="order-book">临摹本</div>
-        					<div class="order-num">
-        						<input class="form-control" pattern="[0-9]*" placeholder="数量" type="number" min="0" max="10000" id="book2" value="" />	
-        					</div>
-        					<div class="order-price">
-        						&times;55/套
-        					</div>
-        				</div>			
-    				</div>
-    				<div class="form-check mt-1">
-      				<div class="d-inline-flex align-items-center">
-      					<label class="form-check-label d-flex align-items-center">
-							<input type="checkbox" class="form-check-input mt-0" name="book3" value="98">	
-        						<img class="img-thumbnail ml-1" src="img/book3.png"/>	
-        					</label>
-        					<div class="order-book">速写套装</div>
-        					<div class="order-num">
-        						<input class="form-control" pattern="[0-9]*" placeholder="数量" type="number" min="0" max="10000" id="book3" value="" />	
-        					</div>
-        					<div class="order-price">
-        						&times;98/套
-        					</div>
-        				</div>
-    				</div>
+			<div id="pruduct_content" class="ml-2">
 			</div>
 			
 			<div class="dropdown-divider"></div>
@@ -210,7 +121,7 @@
 			
 		</div>
 		
-		<div class="container mt-2 bg-white">
+		<div class="container mt-1 bg-white">
 			<div class="order-cell d-flex pt-2">
 				<div class="d-inline-flex justify-content-between order-label">
 					<div>联</div><div>系</div><div>人：</div>
@@ -228,7 +139,6 @@
 				<div class="flex-grow-1 pr-3">
 					<input class="order-input form-control" type="tel" id="order-tel" placeholder="请填写收货人手机号码" value="" />
 				</div>
-				
 			</div>
 			<div class="dropdown-divider"></div>
 			<div class="order-cell d-flex">
@@ -243,9 +153,43 @@
 			
 		</div>
 		
-		<div class="text-center mt-2 mb-4" style="background-color: #f8f8f8;">
+		<div class="text-center mt-3 mb-4" style="background-color: #f8f8f8;">
 				<button id="order_comit" class="btn text-white btn-sm p-0" style="background-color: rgb(245,113,38);width: 160px;height: 32px; border-radius: 6px;">去支付</button>
 		</div>
+		
+		
+		<script type="text/javascript">
+			
+			var uid=easy.getUrlParam('id');
+			if (uid == null) {uid='0';}
+			$.get('json/products.json',function(response,state){
+				var data =response[uid];
+				var pname = data['pname'];
+				var orgname = data['orgname'];
+				$('#product_name').text(pname);
+				$('#org_name').text(orgname);
+				
+				var products = data['product'];
+				for (var i=0;i<products.length;++i) {
+					var pdata = products[i];
+					var pitem = "<div class='form-check mt-1'>"+
+									"<div class='d-inline-flex align-items-center'>"+
+      									"<label class='form-check-label d-flex align-items-center'>"+
+      										"<input type='checkbox' class='form-check-input mt-0' name='"+pdata['bookid']+"' value='"+pdata['price']+"'>"+
+        										"<img class='img-thumbnail ml-1' src='"+pdata['image']+"'/>"+	
+        									"</label>"+
+        									"<div class='order-book'>"+pdata['bookname']+"</div>"+
+        									"<div class='order-num'>"+
+        										"<input class='form-control' pattern='[0-9]*' placeholder='数量' type='number' min='0' max='10000' id='"+pdata['bookid']+"' />"+
+        									"</div>"+
+        									"<div class='order-price'>&times;"+pdata['price']+pdata['unit']+"</div>"+
+      								"</div>"
+    								"</div>";
+    					$("#pruduct_content").append(pitem);
+				}
+			});
+
+		</script>
 		
 	</body>
 
