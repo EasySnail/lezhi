@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css">
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		
+		
+		<script type="text/javascript">
+				$(document).ready(function() {
+					$("#button1").click(function(){
+									
+						var y1 = $("#u-y1").val();
+						var y2 = $("#u-y2").val();
+						var x1 = $("#u-x1").val();
+						var y3 = $("#u-y3").val();
+						var b1 = $("#u-b1").val();
+						var b2 = $("#u-b2").val();
+
+						if(y1.length <= 0 || y2.length <= 0 ||x1.length <= 0 || y3.length <= 0 || b1.length <= 0 ||b2.length <= 0){
+							alert("呵呵！");
+						}else{
+							
+							var y1 = parseFloat(y1);
+							var y2 = parseFloat(y2);
+							var x1 = parseFloat(x1);
+							var y3 = parseFloat(y3);
+							var b1 = parseFloat(b1);
+							var b2 = parseFloat(b2);
+							var x = ((y3 - (x1 / b2) * y2) / y1) * b1;
+							$("#infos").text(x);
+						}
+					});
+				});
+		</script>
+	</head>
+	<body>
+		
+		
+		<h4 class="text-center">  (x/300)*y1 + (x1 / 250) y2 = y3 </h4>
+		
+		
+		
+		<div class="container w-80">
+			<form>
+  				<div class="input-group mb-3">
+    					<div class="input-group-prepend"><span class="input-group-text">y1</span></div>
+    					<input type="number" pattern="[0-9]*" class="form-control" id="u-y1" placeholder="" value="" />
+ 				</div>
+ 				<div class="input-group mb-3">
+    					<div class="input-group-prepend"><span class="input-group-text">y2</span></div>
+    					<input type="number" pattern="[0-9]*" class="form-control" id="u-y2" value="" />
+ 				</div>
+ 				<div class="input-group mb-3">
+    					<div class="input-group-prepend"><span class="input-group-text">x1</span></div>
+    					<input type="number" pattern="[0-9]*" class="form-control" id="u-x1" value="" />
+ 				</div>
+ 				<div class="input-group mb-3">
+    					<div class="input-group-prepend"><span class="input-group-text">y3</span></div>
+    					<input type="number" pattern="[0-9]*" class="form-control" id="u-y3" value="" />
+ 				</div>
+ 				<div class="input-group mb-3">
+    					<div class="input-group-prepend"><span class="input-group-text">b1</span></div>
+    					<input type="number" pattern="[0-9]*" class="form-control" id="u-b1" value="300" />
+ 				</div>
+ 				<div class="input-group mb-3">
+    					<div class="input-group-prepend"><span class="input-group-text">b2</span></div>
+    					<input type="number" pattern="[0-9]*" class="form-control" id="u-b2" value="250" />
+ 				</div>
+			</form>
+		</div>
+		
+		
+		
+		<div class="text-center">
+			<div id="infos" class="text-center">
+			
+			</div>
+			<button id="button1" type="button" class="btn btn-info">计算</button>	
+		</div>
+		
+		
+
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	</body>
+</html>
