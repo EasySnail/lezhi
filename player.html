@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no,shrink-to-fit=no" />
+		<link rel="stylesheet" type="text/css" href="https://g.alicdn.com/de/prismplayer/2.7.0/skins/default/aliplayer-min.css"/>
+		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css">
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+		
+		
+		<script src="https://g.alicdn.com/de/prismplayer/2.7.0/aliplayer-h5-min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<h1>ss</h1>
+		<div  class="prism-player" id="J_prismPlayer" style="position: absolute">
+		</div>
+        <script>
+            var player = new Aliplayer({
+            id: 'J_prismPlayer',
+            width: '100%',
+            playsinline:true,
+            isLive:true,
+            autoplay: true,
+            //支持播放地址播放,此播放优先级最高
+            source : 'http://fkmszb.examok.com/AppName/StreamName.m3u8?auth_key=1529668861-0-0-e9a4af5202ea6e91170632b9eb4ceb63'
+            },function(player){
+                console.log('播放器创建好了。')
+           });
+           
+           
+           player.play();
+        </script>
+	</body>
+</html>
