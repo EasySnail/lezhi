@@ -1,5 +1,6 @@
 $(document).ready(function() {
-	$('.easy-button').click(function() {
+
+	$('#art-form').on('click','.easy-button',function(){
 		$(this).toggleClass('bt-select');
 	});
 });

@@ -10,7 +10,7 @@
 		<title></title>
 		
 		<style type="text/css">
-			body{background: #F1F2F4;}
+			body{background: #F1F2F4;width: 100%;height: 100%;}
 			.container-fluid{padding: 0;margin: 0;}
 			.easy-button-area{
 					font-size: 0.75rem;
@@ -18,9 +18,9 @@
 					overflow: hidden;
  					text-overflow: ellipsis;
  					white-space: nowrap;
-					padding-top: 2px;
-					padding-bottom: 2px;
-					border:solid 0.5px #cdcdcd;
+					padding-top: 3px;
+					padding-bottom: 3px;
+					border:solid 0.7px #cdcdcd;
 					border-radius: 3px;
 					background-color: white;
 					font-weight:normal;
@@ -41,7 +41,8 @@
 		</style>
 		<script type="text/javascript">
 			$(document).ready(function() {
-				$('.easy-button-area').click(function() {
+				//地区点击
+				$('.area_form').on('click','.easy-button-area',function(){
 					$(this).toggleClass('bt-select-area');
 				});
 				//重置
@@ -57,10 +58,11 @@
 		</script>
 	</head>
 	<body>
+		
 		<div class="container-fluid">
 			<div class="easy-section easy-bline">
 				<div class="easy-cell">
-					<img src="./img/img1.png"/>
+					<img class="easy-limg" src="./img/img1.png"/>
 					<span>所属省份</span>
 
 					<img class="easy-arrow" src="./img/arrow.png"/>
@@ -69,9 +71,9 @@
 			</div>
 			<div class="easy-section mt-2 easy-tbline">
 				<div class="easy-cell easy-bline">
-					<img src="./img/img2.png"/>
+					<img class="easy-limg" src="./img/img2.png"/>
 					<span>输入成绩（必填）</span>
-					<img class="float-right" src="./img/img3.png"/>
+					<img class="float-right easy-img" src="./img/img3.png"/>
 				</div>
 				
 				<div class="mt-2 ml-4 mr-4 mb-2">
@@ -99,11 +101,11 @@
 			</div>
 			<div class="easy-section mt-2 easy-tbline">
 				<div class="easy-cell easy-bline">
-					<img src="./img/img4.png"/>
+					<img class="easy-limg" src="./img/img4.png"/>
 					<span>专业方向（必填）</span>
-					<img class="float-right" src="./img/img3.png"/>
+					<img class="float-right easy-img" src="./img/img3.png"/>
 				</div>
-				<div class="mt-2 ml-4 mr-4 mb-2" style="font-size: 0;">
+				<div id="art-form" class="mt-2 ml-4 mr-4 mb-2" style="font-size: 0;">
 					<button class="easy-button" data-id="造型id">造型/艺术类</button>
 					<button class="easy-button" data-id="设计id">设计类</button>
 					<button class="easy-button" data-id="国画id">国画书法类</button>
@@ -114,9 +116,9 @@
 				</div>
 			</div>
 			
-			<div class="easy-section easy-bline mt-2" style="margin-bottom: 44px;">
+			<div class="easy-section easy-bline mt-2" style="margin-bottom: 70px;">
 				<div class="easy-cell easy-bline">
-					<img src="./img/img4.png"/>
+					<img class="easy-limg" src="./img/img4.png"/>
 					<span>报考地区（选填，可多选）</span>
 				</div>
 				<div class="area_form mt-2 ml-4 mr-4 mb-2" style="font-size: 0;">
@@ -152,10 +154,10 @@
 			
 			<div class="d-flex comit-button-div">
 				<div class="w-50 h-100" style="background-color: #C9C9C9;">
-					<button id="reset" type="button" class="btn comit-button">重置</button>	
+					<button style="background-color: #C9C9C9;" id="reset" type="button" class="btn comit-button">重置</button>	
 				</div>
 				<div class="w-50 h-100" style="background-color: #FF9706;">
-					<button id="comit" type="button" class="btn comit-button">提交评估</button>	
+					<button style="background-color: #FF9706;" id="comit" type="button" class="btn comit-button">提交评估</button>	
 				</div>
 			</div>	
 		</div>
