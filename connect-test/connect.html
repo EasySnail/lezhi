@@ -130,17 +130,17 @@
 			<div class="panel" id="panel">
 				<p>
 					<span>appkey</span>
-					<input type="text" id="appKey" size="20" value="lmxuhwagl0qld">
+					<input type="text" id="appKey" size="20" value="z3v5yqkbz4pz0">
 				</p>
 				<p>
 					<span>token</span>
-					<input type="text" style="width: 60%;" id="token" value="bCHkeYhm0mqfUj3Jcxt+rqvG0a0WDwXgtzKz34KPhqn8Z6TIIbi2u2h8JflO2P0POE4OIm7ng81HWmgYwkYDZmItU0lyZF1R">
+					<input type="text" style="width: 60%;" id="token" value="">
 					<select id="tokenselect">
 					</select>
 				</p>
 				<p>
 					<span>聊天室 id</span>
-					<input type="text" id="chatRoomId" size="20" value="URtvjNhHqv">
+					<input type="text" id="chatRoomId" size="20" value="FUP8GQ4sOJ">
 					<b><input type="button" id="joinChatRoom" onclick="joinChatRoom()" value="加入聊天室"> </b>
 					<input type="text" id="navi" size="50" value="" style="height: 1px;border: none;width: 1px;">
 				</p>
@@ -166,7 +166,7 @@
 		$.get('token.json',function(a,b){
 			for (var i=0;i<a.length;++i) {
 				var data = a[i];
-				$("#tokenselect").append("<option value='"+data['token']+"'>"+data['acount']+"</option>");		
+				$("#tokenselect").append("<option value='"+data['token']+"'>"+data['userId']+"</option>");		
 			}
 		});
 		
