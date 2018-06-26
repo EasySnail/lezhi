@@ -159,15 +159,28 @@
 	<script type="text/javascript">
 		
 		$(document).ready(function(){
+			
+			
+		
+			$("#token").val(easy.getUrlParam("token"));
+			
+			
+			for (var i = 0; i < 500;++i) {
+				$("#tokenselect").append("<option value='"+i+"'>"+(i*100)+"-"+((i+1)*100)+"</option>");
+			}
+			
 			$("#tokenselect").change(function(){
 				$("#token").val($(this).val());
 			});
+			
+			
+			
 		});
 		$.get('token.json',function(a,b){
-			for (var i=0;i<a.length;++i) {
-				var data = a[i];
-				$("#tokenselect").append("<option value='"+data['token']+"'>"+data['userId']+"</option>");		
-			}
+//			for (var i=0;i<a.length;++i) {
+//				var data = a[i];
+//				$("#tokenselect").append("<option value='"+data['token']+"'>"+data['userId']+"</option>");		
+//			}
 		});
 		
 	</script>
