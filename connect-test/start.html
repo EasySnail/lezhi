@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
@@ -8,44 +9,47 @@
 		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css">
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 	</head>
-	
+
 	<script type="text/javascript">
-		
 		var tokens;
-		$.get('token1.json',function(a,b){
+		$.get('token1.json', function(a, b) {
 			tokens = a;
+			for(var i = 0; i < tokens.length / 50; ++i) {
+				$("#select").append("<option value='" + i + "'>" + (i * 50) + "-" + ((i + 1) * 50-1) + "</option>");
+			}
 		});
-		$(document).ready(function(){
-			$("#start").click(function(){
-				var index = parseInt(easy.getUrlParam('index')); 
-				for(var i=50*index;i<50*(index+1);++i){
-					window.open("connect.html?token="+tokens[i]);	
-				}
+		$(document).ready(function() {
+			$("#start").click(function() {
+				var index = parseInt($("#select").val());
+				var j = 0;
+				var i = 50 * index;
+				var t = setInterval(function() {
+					$("#ss").text(i);
+					window.open("connect.html?token=" + tokens[i] + "&index=" + j);
+					i++;
+					j++;
+					if(i >= 50 * (index + 1)) {
+						clearInterval(t);
+					}
+				}, 100);
 			});
 		});
 	</script>
 	<body>
-		
-		
+
 		<div class="container mt-4" style="text-align: center;">
 			<div id="">
 				<select id="select" name=""></select>
 			</div>
 			<div class="mt-4">
 				<button id="start">开始</button>
-			</div>	
-			
+			</div>
+
 		</div>
-		
-		
-		
-		
-		
-		<script type="text/javascript">
-			for (var i = 0; i < 500;++i) {
-				$("#select").append("<option value='"+i+"'>"+(i*100)+"-"+((i+1)*100)+"</option>");
-			}
-		</script>
-		
+		<span id="ss">
+			
+		</span>
+
 	</body>
+
 </html>
