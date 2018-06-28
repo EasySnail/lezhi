@@ -11,24 +11,30 @@
 	</head>
 
 	<script type="text/javascript">
+		
+		
+		
 		var tokens;
+		var dcount = 100;
+		var dd = easy.getUrlParam('page');
+		if(dd != null){
+			dcount = dd;
+		}
 		$.get('token1.json', function(a, b) {
 			tokens = a;
-			for(var i = 0; i < tokens.length / 50; ++i) {
-				$("#select").append("<option value='" + i + "'>" + (i * 50) + "-" + ((i + 1) * 50-1) + "</option>");
+			for(var i = 0; i < tokens.length / dcount; ++i) {
+				$("#select").append("<option value='" + i + "'>" + (i * dcount) + "-" + ((i + 1) * dcount-1) + "</option>");
 			}
 		});
 		$(document).ready(function() {
 			$("#start").click(function() {
 				var index = parseInt($("#select").val());
-				var j = 0;
-				var i = 50 * index;
+				var i = dcount * index;
 				var t = setInterval(function() {
 					$("#ss").text(i);
-					window.open("connect.html?token=" + tokens[i] + "&index=" + j);
+					window.open("connect.html?index=" + i + "&token=" + tokens[i]);
 					i++;
-					j++;
-					if(i >= 50 * (index + 1)) {
+					if(i >= dcount * (index + 1)) {
 						clearInterval(t);
 					}
 				}, 100);
