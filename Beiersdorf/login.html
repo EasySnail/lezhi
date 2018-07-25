@@ -7,52 +7,30 @@
 		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 		<title></title>
 		<style type="text/css">
-			html{
-    				height: 100%;
-			}
-			body{
-				width: 100%;
-				height: 100%;
- 	   			background: url('img/bg1.png') no-repeat left top / 100% 100%;
-			}
-			.img_div{
-				padding-top: 20%;
-			}
-			.input_div{
-				margin-top: 20%;
-			}
+			html{height: 100%;}
+			body{width: 100%;height: 100%;background: url('img/bg1.png') no-repeat left top / 100% 100%;background-attachment:fixed;}
+			.img_div{padding-top: 20%;}
+			.input_div{margin-top: 20%;}
 			div img{width: 100%;}
 			label img{width: 80%;}
-			label{
-				margin-left: 10px;
-				width: 18px;
-			}
-			input{
-				border-style: none;
-				font-size: 0.875rem;
-				width: 100%;
-			}
-			
-			#code{
-				width: 70px;
-				height: 30px;
-				font-size: 0.8rem;
-				border-radius: 0;
-				margin-top: 10px;
-				margin-right: 5px;
-				text-align: center;
-			}
-			div button{
-				color: white;
-				background-color: rgba(0,0,0,0);
-				width: 100%;
-				border: white 1px solid;
-				border-radius: 1px;
-				padding: 3px;
-				margin-top: 2px;
-			}
-			
+			label{margin-left: 10px;width: 18px;}
+			input{font-size: 0.875rem;width: 100%;outline:medium;border: none;background: transparent;}
+			div button{color: white;background-color: rgba(0,0,0,0);width: 100%;border: white 1px solid;border-radius: 1px;padding: 3px;margin-top: 2px;}
+			.code_div input{width: 60px;display: inline-block;background: white;font-size: 0.8rem;padding: 3px 3px 3px 10px;margin-top: 10px;}
+			.code_div img{height: 20px;width: auto; background: burlywood;display: inline-block;}
 		</style>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				//点击验证码
+				$('#code_img').click(function(){
+					
+				});
+				//点击登录
+				$('.login_div').click(function(){
+					
+				});
+			});
+		</script>
 	</head>
 	<body>
 		
@@ -66,7 +44,7 @@
 				<div class="d-flex">
 					<label><img src="img/account_left_img.png"/></label>
 					<div class="flex-grow-1 pr-1">
-						<input type="text" id="userName" placeholder="userName" />
+						<input type="text" id="userName" placeholder="userName" autocomplete="off" />
 					</div>
 				</div>
 				<div id="line" style="width: 100%;height: 1px;background: #E1E1E1;margin-bottom: 5px;margin-top: 3px;">
@@ -79,12 +57,12 @@
 				</div>
 			</div>
 			
-			<div class="">
-					<input type="text" id="code" placeholder="验证码" />
-					<img src="" style="height: 24px; max-width: 60px;"/>
+			<div class="code_div">
+				<input type="text" id="code" placeholder="验证码" autocomplete="off" />
+				<img id="code_img" src="img/test_1.png" alt="验证码" />
 			</div>
 			
-			<div class="" style="padding-top: 20%;">
+			<div class="login_div" style="padding-top: 20%;">
 				<button>登 录</button>
 			</div>
 		</div>
