@@ -1,0 +1,99 @@
+
+<div id="">
+	<div class="card mt-4">
+		<h4 class="card-header">晓丹统计</h4>
+  		<img class="card-img-top"/>
+  		<div class="card-body">
+    			<h5 class="card-title"><a>姓名：</a><a id="main-name" class="text-primary"></a></h5>
+    			<p class="card-text">统计参与人员的分享考勤情况。</p>
+  		</div>
+ 		 <ul class="list-group list-group-flush">
+ 		 	<li class="list-group-item">
+ 		 		<div class="d-flex justify-content-between"> 		 			
+ 		 			<a href="#" class="align-self-center text-dark">签到:<span class="ml-3 text-info" id="sign-time"></span></a>
+ 		 			<button id="sign_button" type="button" class="btn btn-warning btn-sm align-self-center"> 签到 </button>
+ 		 		</div>
+ 		 	</li>
+ 		 	
+    			<li id="my_sign" class="list-group-item text-primary"><a href="my_sign.html">考勤记录</a></li>
+    			<li id="all_sign" class="list-group-item text-primary">全部考勤</li>
+  		</ul>
+ 		<div class="card-body">
+    			<a href="#" class="card-link text-success">导出</a>
+  		</div>
+  		<div class="card-footer text-muted text-right">
+    			<a href="#" id="sign_exit" class="card-link text-danger">退出</a>
+		</div>
+
+	</div>
+	<script type="text/javascript">
+		var name = easy.get_login_name();
+		$("#main-name").text(easy.get_login_nickname());
+		getSignData();
+		function getSignData(){
+			setSignButtonStyle(3);
+			var time = getNowFormatDate("yyyy-MM");
+			var day = getNowFormatDate("dd");
+			var url = "https://abcde12345.wilddogio.com/sign/".concat(time,"/",day,"/",name,".json");  
+			$.ajax({
+				type:"get",
+				url:url,
+				async:false,
+				dataType: 'json',
+				success:function(e) {
+					setSignButtonStyle((e == null) ? 0 : 2);
+					if(e!=null){
+						var time = e['time'];
+						$("#sign-time").text(time.slice(11,19));
+					}
+				},
+				error:function(e){
+					setSignButtonStyle(4);
+				}
+			});
+		}
+		
+		$("#sign_button").click(function(){
+			setSignButtonStyle(1);
+			var time = getNowFormatDate("yyyy-MM");
+			var day = getNowFormatDate("dd");
+			var url = "https://abcde12345.wilddogio.com/sign/".concat(time,"/",day,"/",name,".json"); 
+			var data = {"time":getNowFormatDate("yyyy-MM-dd HH:mm:ss"),"nick_name":easy.get_login_nickname()};
+			$.ajax({
+				type:"put",
+				url:url,
+				async:false,
+				dataType: 'json',
+				data:JSON.stringify(data),
+				success:function(e) {
+					setSignButtonStyle(2);
+					$("#sign-time").text(data['time'].slice(11,19));
+				},
+				error:function(e){
+					easy.toast("签到失败！");
+					setSignButtonStyle(0);
+				}
+			});
+		});
+		
+		//0=签到，1=加载，2=已签到，3=加载中，4=获取失败
+		function setSignButtonStyle(style){
+			if (style == 1) {
+				$("#sign_button").attr("disabled", true);
+				$("#sign_button").text("签到中...");
+			}else if(style == 0){
+				$("#sign_button").attr("disabled", false);
+				$("#sign_button").text("签到");
+			}else if(style == 2){
+				$("#sign_button").attr("disabled", true);
+				$("#sign_button").text("已签到");
+			}else if(style == 3){
+				$("#sign_button").attr("disabled", true);
+				$("#sign_button").text("加载中...");
+			}else{
+				$("#sign_button").attr("disabled", true);
+				$("#sign_button").text("获取失败！");
+			}
+		}
+	</script>
+</div>

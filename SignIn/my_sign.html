@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no,shrink-to-fit=no" />
+    		<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.min.css">
+    		<script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    		<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    		<script src="js/time.js" type="text/javascript" charset="utf-8"></script>
+		<title></title>
+		<style type="text/css">
+			select{-webkit-appearance: none;height: 30px;padding-top: 0;padding-bottom: 0;}
+		</style>
+		<script type="text/javascript">
+			$(document).ready(function(){
+				init_sign();
+				$("select").change(function(){
+					requestMy_sign();
+				});
+				function requestMy_sign(){
+					var date = $("select").val();
+					var time = date.slice(0,7);
+					var day = date.slice(8,10);
+					var url = "https://abcde12345.wilddogio.com/sign/".concat(time,"/",day,".json");
+					$.ajax({
+							type:"get",
+							url:url,
+							async:false,
+							dataType: 'json',
+							success:function(e) {
+								if(e == null){
+									$("#list").html("<li class='list-group-item text-center'>无数据！</li>");
+								}else{
+									var html = "";
+									for(var key in e){										
+										var str = "<li class='list-group-item d-flex'><div style='width: 80px;'>";
+										str += e[key]['nick_name'];
+										str += "</div><div style='width: 80px;'>";
+										var tt = e[key]['time'];
+ 		 								str += (tt.slice(11,19));
+										str += "</div></li>";				
+										html += str;
+									}
+									$("#list").html(html);
+								}
+							},
+							error:function(e){
+								easy.toast('获取失败！');
+							}
+					});
+				}
+				
+				function init_sign(){
+					var date = new Date();
+					var str = "<option>".concat(getNowFormatDate("yyyy-MM-dd",date),"</option>");
+					for (var i=1; i<=10;++i) {
+       					date.setDate(date.getDate()-1); 
+						str = str.concat("<option>",getNowFormatDate("yyyy-MM-dd",date),"</option>");
+					}
+					$("select").html(str);
+					
+					requestMy_sign();
+				}
+			});
+		</script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="card mt-4">
+	  			<div class="card-header d-flex justify-content-between">
+	  				<a class="align-self-center" style="font-size: 1.15rem; font-weight: 500;">签到记录</a>
+	  				 <select class="form-control" id="" style="width: 120px;">
+  					</select>
+	  			</div>
+	  			
+	  			<ul id="list" class="list-group list-group-flush">
+ 				</u>
+			</div>
+		</div>
+	</body>
+</html>
